@@ -1,0 +1,33 @@
+[package]
+name = "norgopolis-client-lua"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+mlua = { version = "0.9.1", features = ["module", "serialize", "async"] }
+norgopolis-client = "0.2.1"
+serde = "1.0.188"
+tokio = "1.0"
+
+[lib]
+name = "norgopolis_client"
+crate-type = ["cdylib"]
+
+[features]
+lua54 = ["mlua/lua54"]
+lua53 = ["mlua/lua53"]
+lua52 = ["mlua/lua52"]
+luajit = ["mlua/luajit"]
+lua51 = ["mlua/lua51"]
+
+[target.x86_64-apple-darwin]
+rustflags = [
+  "-C", "link-arg=-undefined",
+  "-C", "link-arg=dynamic_lookup",
+]
+
+[target.aarch64-apple-darwin]
+rustflags = [
+  "-C", "link-arg=-undefined",
+  "-C", "link-arg=dynamic_lookup",
+]
