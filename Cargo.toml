@@ -6,6 +6,7 @@ edition = "2021"
 [dependencies]
 mlua = { version = "0.9.1", features = ["module", "serialize", "async"] }
 norgopolis-client = "0.2.1"
+rmp-serde = "1.1.2"
 serde = "1.0.188"
 tokio = "1.0"
 

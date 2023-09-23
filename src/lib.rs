@@ -1,34 +1,40 @@
 use mlua::{Function, Lua, LuaSerdeExt, Result, String, Table, UserData, UserDataMethods};
 use nc::MessagePack;
 use norgopolis_client as nc;
+use std::io::Write;
 
-struct Connection(nc::ConnectionHandle);
+struct Connection {
+    handle: tokio::runtime::Handle,
+    connection: nc::ConnectionHandle,
+}
+
+impl Connection {
+    pub fn new(connection: nc::ConnectionHandle, handle: tokio::runtime::Handle) -> Connection {
+        Connection { connection, handle }
+    }
+}
 
 impl UserData for Connection {
     fn add_methods<'lua, M: UserDataMethods<'lua, Self>>(methods: &mut M) {
-        methods.add_async_method_mut(
+        methods.add_method_mut(
             "invoke",
             |lua,
              this,
              (module_name, function_name, parameters, callback): (
                 String,
                 String,
-                Table,
+                Option<mlua::Value>,
                 Function,
-            )| async move {
+            )| {
                 Ok(this
-                    .0
-                    .invoke::<(), _>(
+                    .handle
+                    .block_on(this.connection.invoke(
                         module_name.to_str()?.into(),
                         function_name.to_str()?.into(),
-                        Some(MessagePack::encode(parameters).expect("Encoding failed")),
-                        |_| callback.call(lua.to_value(&"Hello")).unwrap(), // TODO:
-                                                                            // Allow
-                                                                            // a
-                                                                            // raw
-                                                                            // response.
-                    )
-                    .await
+                        // Some(MessagePack::encode(parameters).expect("Encoding failed")),
+                        Some(MessagePack::encode("hello").unwrap()),
+                        |ret: std::string::String /*: TODO*/| callback.call(ret).unwrap(), // TODO: Error handling
+                    ))
                     .unwrap())
             },
         );
@@ -38,24 +44,26 @@ impl UserData for Connection {
 #[mlua::lua_module]
 pub fn norgopolis_client(lua: &Lua) -> Result<Table> {
     let client = lua.create_table()?;
+    let rt = tokio::runtime::Runtime::new().unwrap();
+    let _guard = rt.enter();
 
     client.set(
         "connect",
-        lua.create_async_function(|_, (ip, port): (String, Option<String>)| async move {
-            let rt = tokio::runtime::Runtime::new().unwrap();
-            let _guard = rt.enter();
-
-            // NOTE: This seems to run the future off-thread which makes the service "not ready"
-            // according to the rust side.
-            Ok(Connection(
-                rt.block_on(nc::connect(
-                    &ip.to_str().unwrap().to_string(),
-                    &port
-                        .map(|val| val.to_str().unwrap().to_string())
-                        .unwrap_or("62020".to_string()),
+        lua.create_function(move |_, (ip, port): (String, Option<String>)| {
+            rt.block_on(async {
+                let handle = rt.handle().to_owned();
+                Ok(Connection::new(
+                    nc::connect(
+                        &ip.to_str().unwrap().to_string(),
+                        &port
+                            .map(|val| val.to_str().unwrap().to_string())
+                            .unwrap_or_else(|| "62020".to_string()),
+                    )
+                    .await
+                    .unwrap(),
+                    handle,
                 ))
-                .unwrap(),
-            ))
+            })
         })?,
     )?;
 
