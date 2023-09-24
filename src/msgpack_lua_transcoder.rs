@@ -1,6 +1,8 @@
 use mlua::{Lua, LuaSerdeExt};
 use norgopolis_client::MessagePack;
 
+///! TODO: This whole file requires implementing error handling.
+
 /// Transcodes from messagepack to a lua value
 ///
 /// * `value`:
