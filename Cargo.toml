@@ -4,9 +4,11 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+futures = "0.3.28"
 mlua = { version = "0.9.1", features = ["module", "serialize", "async"] }
-norgopolis-client = "0.2.1"
+norgopolis-client = "0.3.0"
 rmp-serde = "1.1.2"
+rmpv = "1.0.1"
 serde = "1.0.188"
 tokio = "1.0"
 

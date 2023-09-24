@@ -597,9 +597,9 @@ checksum = "e5ce46fe64a9d73be07dcbe690a38ce1b293be448fd8ce1e6c1b8062c9f72c6a"
 
 [[package]]
 name = "norgopolis-client"
-version = "0.2.1"
+version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7ca5d8bd0b0c0a0e646bc042cc2140b71b4ad2043e73fab9001d1ec319764bd5"
+checksum = "4e2512bef46dcee40185c3b3743fa4fcd6f020aa741d4508db698db79504067a"
 dependencies = [
  "anyhow",
  "futures",
@@ -616,9 +616,11 @@ dependencies = [
 name = "norgopolis-client-lua"
 version = "0.1.0"
 dependencies = [
+ "futures",
  "mlua",
  "norgopolis-client",
  "rmp-serde",
+ "rmpv",
  "serde",
  "tokio",
 ]
@@ -915,6 +917,16 @@ dependencies = [
  "byteorder",
  "rmp",
  "serde",
+]
+
+[[package]]
+name = "rmpv"
+version = "1.0.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2e0e0214a4a2b444ecce41a4025792fc31f77c7bb89c46d253953ea8c65701ec"
+dependencies = [
+ "num-traits",
+ "rmp",
 ]
 
 [[package]]

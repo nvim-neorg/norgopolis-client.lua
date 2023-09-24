@@ -1,7 +1,8 @@
-use mlua::{Function, Lua, LuaSerdeExt, Result, String, Table, UserData, UserDataMethods};
+use mlua::{Function, Lua, Result, String, Table, UserData, UserDataMethods};
 use nc::MessagePack;
 use norgopolis_client as nc;
-use std::io::Write;
+
+mod msgpack_lua_transcoder;
 
 struct Connection {
     handle: tokio::runtime::Handle,
@@ -26,16 +27,21 @@ impl UserData for Connection {
                 Option<mlua::Value>,
                 Function,
             )| {
-                Ok(this
-                    .handle
-                    .block_on(this.connection.invoke(
+                this.handle
+                    .block_on(this.connection.invoke_raw_callback(
                         module_name.to_str()?.into(),
                         function_name.to_str()?.into(),
-                        // Some(MessagePack::encode(parameters).expect("Encoding failed")),
-                        Some(MessagePack::encode("hello").unwrap()),
-                        |ret: std::string::String /*: TODO*/| callback.call(ret).unwrap(), // TODO: Error handling
+                        Some(msgpack_lua_transcoder::transcode_lua_msgpack(
+                            parameters.unwrap(),
+                        )),
+                        |ret: MessagePack| {
+                            let lua_value =
+                                msgpack_lua_transcoder::transcode_msgpack_lua(lua, ret).unwrap();
+                            callback.call::<_, ()>(lua_value).unwrap();
+                        }, // TODO: Error handling
                     ))
-                    .unwrap())
+                    .unwrap();
+                Ok(())
             },
         );
     }

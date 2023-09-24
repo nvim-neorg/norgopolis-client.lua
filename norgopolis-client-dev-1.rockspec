@@ -4,7 +4,7 @@ source = {
    url = "git+https://github.com/nvim-neorg/norgopolis-client.lua"
 }
 description = {
-   homepage = "https://github.com/vhyrro/norgopolis-client.lua",
+   homepage = "https://github.com/nvim-neorg/norgopolis-client.lua",
    license = "MIT"
 }
 
