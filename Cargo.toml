@@ -13,7 +13,7 @@ serde = "1.0.188"
 tokio = "1.0"
 
 [lib]
-name = "norgopolis_client"
+name = "norgopolis"
 crate-type = ["cdylib"]
 
 [features]

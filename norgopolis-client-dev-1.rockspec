@@ -16,6 +16,6 @@ dependencies = {
 build = {
     type = "rust-mlua",
     modules = {
-        "norgopolis_client"
+        "norgopolis"
     },
 }
