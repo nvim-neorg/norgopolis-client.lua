@@ -48,7 +48,7 @@ impl UserData for Connection {
 }
 
 #[mlua::lua_module]
-pub fn norgopolis_client(lua: &Lua) -> Result<Table> {
+pub fn norgopolis(lua: &Lua) -> Result<Table> {
     let client = lua.create_table()?;
     let rt = tokio::runtime::Runtime::new().unwrap();
     let _guard = rt.enter();

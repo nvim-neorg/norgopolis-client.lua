@@ -98,6 +98,6 @@ pub fn transcode_lua_msgpack_value(value: mlua::Value) -> rmpv::Value {
         mlua::Value::Function(_) => panic!("TODO. Functions cannot be encoded in messagepack!"),
         mlua::Value::Thread(_) => unimplemented!(),
         mlua::Value::UserData(_) => unimplemented!(),
-        mlua::Value::Error(_) => unimplemented!(),
+        mlua::Value::Error(_) => unreachable!(),
     }
 }
