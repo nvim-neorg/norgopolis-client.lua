@@ -1,0 +1,29 @@
+name: Publish to Luarocks
+
+on:
+  workflow_dispatch:
+
+jobs:
+  luarocks-upload:
+    if: ${{ startsWith(github.ref, 'refs/tags/v') }}
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Required to count the commits
+      - name: Get Version
+        run: echo "LUAROCKS_VERSION=$(git describe --abbrev=0 --tags)" >> $GITHUB_ENV
+      - name: LuaRocks Upload
+        uses: nvim-neorocks/luarocks-tag-release@v5
+        env:
+          LUAROCKS_API_KEY: ${{ secrets.LUAROCKS_API_KEY }}
+        with:
+          version: ${{ env.LUAROCKS_VERSION }}
+          test_interpreters: ""
+          labels: |
+            rust
+          detailed_description:
+            A Lua binding to the Rust norgopolis-client module.
+
+            Allows for interacting with Norgopolis, optionally spawning the server if it is not yet started (norgopolis-server.lua must be installed for this capability).
+          template: "/template.rockspec"
