@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/nvim-neorg/norgopolis-client.lua/compare/v0.1.1...v0.1.2) (2024-01-03)
+
+
+### Bug Fixes
+
+* **ci/luarocks:** install protoc before publishing to luarocks ([11a577d](https://github.com/nvim-neorg/norgopolis-client.lua/commit/11a577d904d828c23f5a8131b3e55ae770f961f1))
+
 ## [0.1.1](https://github.com/nvim-neorg/norgopolis-client.lua/compare/v0.1.0...v0.1.1) (2024-01-03)
 
 
