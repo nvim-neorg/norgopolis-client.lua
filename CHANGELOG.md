@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3](https://github.com/nvim-neorg/norgopolis-client.lua/compare/v0.1.2...v0.1.3) (2024-01-03)
+
+
+### Bug Fixes
+
+* **ci/luarocks:** use `sudo` ([4a8d7e5](https://github.com/nvim-neorg/norgopolis-client.lua/commit/4a8d7e54dc455c7ca7efbd0e4c30db847fffe65e))
+
 ## [0.1.2](https://github.com/nvim-neorg/norgopolis-client.lua/compare/v0.1.1...v0.1.2) (2024-01-03)
 
 
