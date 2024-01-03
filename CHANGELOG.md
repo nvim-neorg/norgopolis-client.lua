@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/nvim-neorg/norgopolis-client.lua/compare/v0.1.0...v0.1.1) (2024-01-03)
+
+
+### Bug Fixes
+
+* **ci/luarocks:** typo in path to template ([2d3bebe](https://github.com/nvim-neorg/norgopolis-client.lua/commit/2d3bebeb6b964fe6b4846c36f6861428e1ce7aaa))
+
 ## 0.1.0 (2024-01-03)
 
 
