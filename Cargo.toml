@@ -6,7 +6,7 @@ edition = "2021"
 [dependencies]
 futures = "0.3.28"
 mlua = { version = "0.9.1", features = ["module", "serialize", "async"] }
-norgopolis-client = "0.3.0"
+norgopolis-client = { version = "0.4.0", features = ["autostart-server"] }
 rmp-serde = "1.1.2"
 rmpv = "1.0.1"
 serde = "1.0.188"
