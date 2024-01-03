@@ -26,4 +26,4 @@ jobs:
             A Lua binding to the Rust norgopolis-client module.
 
             Allows for interacting with Norgopolis, optionally spawning the server if it is not yet started (norgopolis-server.lua must be installed for this capability).
-          template: "/template.rockspec"
+          template: "template.rockspec"
