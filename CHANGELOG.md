@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/nvim-neorg/norgopolis-client.lua/compare/v0.1.4...v0.2.0) (2024-02-17)
+
+
+### Features
+
+* use newer version of norgopolis client ([f8c86ba](https://github.com/nvim-neorg/norgopolis-client.lua/commit/f8c86ba40fb24bc4e5fdef7d4fbf03bedbb1acf7))
+
 ## [0.1.4](https://github.com/nvim-neorg/norgopolis-client.lua/compare/v0.1.3...v0.1.4) (2024-02-17)
 
 
