@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.4](https://github.com/nvim-neorg/norgopolis-client.lua/compare/v0.1.3...v0.1.4) (2024-02-17)
+
+
+### Bug Fixes
+
+* do not try to autostart the server automatically ([0e2bdb0](https://github.com/nvim-neorg/norgopolis-client.lua/commit/0e2bdb0e8fc6fa4c24403bf7b0f3c39128b85cb2))
+
 ## [0.1.3](https://github.com/nvim-neorg/norgopolis-client.lua/compare/v0.1.2...v0.1.3) (2024-01-03)
 
 
