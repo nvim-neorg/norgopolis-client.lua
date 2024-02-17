@@ -598,8 +598,6 @@ checksum = "e5ce46fe64a9d73be07dcbe690a38ce1b293be448fd8ce1e6c1b8062c9f72c6a"
 [[package]]
 name = "norgopolis-client"
 version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2ec6e2b3af43056ebb766890a0e212099f38b44402bb83626ccc2861e38e92b5"
 dependencies = [
  "anyhow",
  "futures",
